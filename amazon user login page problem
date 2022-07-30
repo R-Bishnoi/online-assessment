@@ -1,0 +1,150 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    
+ int t;
+ cin>>t;
+ 
+  vector<string>v;
+  vector<string>res;
+  //remove input buffer
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+  
+  for(int i=0;i<t;i++){
+      string ss;
+      getline(cin,ss);
+      v.push_back(ss);
+  }
+ 
+ set<pair<string,string>>st;
+ 
+ for(int j=0;j<t;j++){  
+    string s=v[j];
+    
+    string str="";
+
+  int i=0;
+ while(s[i]!=' '){
+     str=str+s[i];
+     i++;
+ }
+ 
+ i++;
+ 
+ //cout<<i<<endl;
+ 
+ // registration programme
+ if(str=="register"){
+     //username
+     string a="";
+     //password
+     string b="";
+     
+    while(s[i]!=' '){
+        a=a+s[i];
+        i++;
+    }
+    
+    i++;
+    
+    while(i<s.size()){
+        b=b+s[i];
+        i++;
+    }
+    
+    
+  if(st.find({a,b})==st.end()){
+    st.insert({a,b});
+    res.push_back("Registered Successfully");
+       }
+
+
+  else{
+     res.push_back("username already exists");
+  } 
+  
+ }
+ 
+ 
+ 
+ //login programme
+ else if(str=="login"){
+     
+     //username
+     string a="";
+     //password
+     string b="";
+     
+    while(s[i]!=' '){
+        a=a+s[i];
+        i++;
+    }
+    
+    i++;
+    
+    while(i<s.size()){
+        b=b+s[i];
+        i++;
+    }
+    
+    if(st.find({a,b})!=st.end()){
+       res.push_back("Logged In Successfully");
+        
+    }
+
+    else{
+       res.push_back("Login Unsuccessful");
+    }
+ }
+ 
+ 
+ //logout programme
+ else if(str=="logout"){
+      
+      string a="";
+      while(i<s.size()){
+          a=a+s[i];
+          i++;
+      }
+      
+      //cout<<str<<" "<<a<<endl;
+     
+      int f=0;
+    for(auto x=st.begin();x!=st.end();){
+        if((*x).first==a){
+            st.erase(x);
+            res.push_back("Logout Successfully");
+            break;
+        }
+        
+        else
+          x++;
+    }
+    
+    
+    
+    if(f==0)
+      res.push_back("Logout Unsuccessful");
+ 
+    else if(f==1)
+     res.push_back("Logout Successfully");
+     
+     
+ 
+ }
+ 
+ 
+     
+ }
+ 
+ 
+ 
+ for(int i=0;i<t;i++){
+     cout<<res[i]<<endl;
+ }
+
+ 
+    
+    return 0;
+}
