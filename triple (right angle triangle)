@@ -1,0 +1,80 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+//The second question was based on array. Given an array of integers, 
+//find triplets x, y,z such that all three are elements of the array and x^2 + y^2 = z^2.
+//3 sum like problem
+
+
+vector<int>v;
+
+int main(){
+    
+    int n;
+    cin>>n;
+
+for(int i=0;i<n;i++){
+    int a;
+    cin>>a;
+    v.push_back(a);
+}
+
+//generate all triplets
+vector<vector<int>>ans;
+
+  unordered_map<int,int>mp;
+  set<vector<int>>st;
+ 
+  for(int i=0;i<n-2;i++){
+     
+     for(int j=i+1;j<n;j++){
+         
+         if(mp.find((v[i]*v[i])+(v[j]*v[j]))!=mp.end()){
+             
+            ans.push_back({v[i],v[j],v[mp[v[i]*v[i]+v[j]*v[j]]]}); 
+             
+         }
+         
+         else if(mp.find((v[i]*v[i])-(v[j]*v[j]))!=mp.end()){
+            ans.push_back({v[i],v[j],v[mp[(v[i]*v[i])-(v[j]*v[j])]]});
+         }
+         
+         else if( mp.find(v[j]*v[j]-v[i]*v[i])!=mp.end()){
+             
+              ans.push_back({v[i],v[j],v[mp[(v[j]*v[j])-(v[i]*v[i])]]});
+         }
+         
+         else{
+             mp[v[j]*v[j]]=j;
+         }
+         
+     }
+     
+     
+     
+     
+  }
+  
+  
+  vector<int>p;
+
+for(int i=0;i<ans.size();i++){
+    p.insert(p.end(),ans[i].begin(),ans[i].end());
+    sort(p.begin(),p.end());
+    st.insert(p);
+    p.clear();
+}
+
+  
+  
+  for(auto x:st){
+      cout<<x[0]<<" "<<x[1]<<" "<<x[2]<<endl;
+  }
+  
+  
+ 
+
+    
+    return 0;
+}
+
